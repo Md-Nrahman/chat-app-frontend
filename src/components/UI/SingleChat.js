@@ -15,7 +15,7 @@ import UpdateGroupChatModal from "../UI/UpdateGroupChatModal";
 import { ChatState } from "../../Context/ChatProvider";
 import { baseUrl } from "../../common/baseUrl";
 import ProfileModal from "./ProfileModal";
-const ENDPOINT = "http://test-for-mern.herokuapp.com/"; 
+const ENDPOINT = "https://test-for-mern.herokuapp.com/"; 
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
