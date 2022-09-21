@@ -5,7 +5,7 @@ import { VStack } from "@chakra-ui/layout";
 import { useState } from "react";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { baseUrl } from "../../common/baseUrl";
 
 const Login = () => {
@@ -56,7 +56,8 @@ const Login = () => {
       });
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      history.push("/chats");
+      // history.push("/chats");
+      <Redirect to={'/chats'}/>
     } catch (error) {
       toast({
         title: "Error Occured!",
