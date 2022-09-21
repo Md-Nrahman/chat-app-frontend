@@ -1,5 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
-import { Box, Button, Stack, Text, useToast } from '@chakra-ui/react';
+import { Box, Button, Flex, Stack, Text, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { baseUrl } from '../../common/baseUrl';
@@ -54,32 +54,34 @@ const MyChats = ({ fetchAgain }) => {
       borderRadius="lg"
       borderWidth="1px"
     >
+      <Flex  direction="column"
+      align="center"></Flex>
       <Box
         pb={3}
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
         fontFamily="Work sans"
-        d="flex"
         w="100%"
-        justifyContent="space-between"
-        alignItems="center"
+       
       >
+        <Flex  justify="space-between"
+        align="center">
         My Chats
         
          <GroupChatModal>
          <Button
-            d="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             rightIcon={<AddIcon />}
           >
-            New Group Chat
+            <Flex>New Group Chat</Flex>
+            
           </Button>
          </GroupChatModal>
-        
+         </Flex>
       </Box>
       <Box
-        d="flex"
-        flexDir="column"
+        
+        
         p={3}
         bg="#F8F8F8"
         w="100%"
@@ -87,6 +89,7 @@ const MyChats = ({ fetchAgain }) => {
         borderRadius="lg"
         overflowY="hidden"
       >
+        <Flex direction="column">
         {chats ? (
           <Stack overflowY="scroll">
             {chats.map((chat) => (
@@ -119,6 +122,7 @@ const MyChats = ({ fetchAgain }) => {
         ) : (
           <ChatLoading />
         )}
+        </Flex>
       </Box>
     </Box>
   );

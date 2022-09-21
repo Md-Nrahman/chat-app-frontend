@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/layout";
+import { Flex, Spacer } from '@chakra-ui/react'
 import { useState } from "react";
 import SideDrawer from "../components/UI/SideDrawer";
 import { ChatState } from "../Context/ChatProvider";
@@ -12,11 +13,14 @@ const Chatpage = () => {
   return (
     <div style={{ width: "100%" }}>
       {user && <SideDrawer />}
-      <Box d="flex" justifyContent="space-between" w="100%" h="91.5vh" p="10px">
+      <Box  w="100%" h="91.5vh" p="10px">
+        <Flex justify="space-between">
         {user && <MyChats fetchAgain={fetchAgain} />}
         {user && (
           <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
         )}
+        </Flex>
+        
       </Box>
     </div>
   );

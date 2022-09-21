@@ -1,5 +1,5 @@
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
+import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Flex, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
@@ -93,11 +93,12 @@ const toast = useToast()
 
   return (
     <>
-    <Box d="flex" justifyContent="space-between" alignItems="center"
+    <Box
     bg="white"
     w="100%"
     p="5px 10px 5px 10px"
     borderWidth="5px">
+      <Flex justify="space-between" align="center">
         <Tooltip label="Search users to chat" hasArrow placement='bottom-end'>
             <Button variant="ghost" onClick={onOpen}>
     <i className='fas fa-search'></i>
@@ -132,6 +133,7 @@ const toast = useToast()
          
             
         </div>
+        </Flex>
     </Box>
 
     <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
@@ -139,9 +141,11 @@ const toast = useToast()
     <DrawerContent>
         <DrawerHeader borderBottomWidth="1px">Search users</DrawerHeader>
         <DrawerBody>
-        <Box d="flex" pb={2}>
+        <Box pb={2}>
+          <Flex>
             <Input placeholder="Search by name or email" value={search} onChange={(e)=>setsearch(e.target.value)}/>
             <Button onClick={handleSearch}>Go</Button>
+            </Flex>
         </Box>
         {loading?(
             <ChatLoading/>
@@ -150,7 +154,7 @@ const toast = useToast()
                 <UserListItem key={user._id} user={user} handleFunction={()=>accessChat(user._id)} />
             ))
         )}
-         {chatLoading && <Spinner ml="auto" d="flex" />}
+         {chatLoading && <Flex> <Spinner ml="auto" /></Flex>}
     </DrawerBody>
     </DrawerContent>
    
