@@ -1,1 +1,1 @@
-export const baseUrl= "https://test-for-mern.herokuapp.com"
+export const baseUrl= "https://mern-chat-backend-server.herokuapp.com"
