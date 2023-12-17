@@ -1,1 +1,1 @@
-export const baseUrl= "https://mern-chat-backend-server.herokuapp.com"
+export const baseUrl = "https://chat-backend-zxi2.onrender.com";
