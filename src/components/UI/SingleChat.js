@@ -15,7 +15,7 @@ import UpdateGroupChatModal from "../UI/UpdateGroupChatModal";
 import { ChatState } from "../../Context/ChatProvider";
 import { baseUrl } from "../../common/baseUrl";
 import ProfileModal from "./ProfileModal";
-const ENDPOINT = "https://mern-chat-backend-server.herokuapp.com/"; 
+const ENDPOINT = "https://chat-backend-zxi2.onrender.com/";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
