@@ -1,11 +1,6 @@
-import { Avatar } from "@chakra-ui/avatar";
-import { Box, Text } from "@chakra-ui/layout";
-import { ChatState } from "../../Context/ChatProvider";
-
-const UserListItem = ({ user,handleFunction }) => {
- 
+const UserListItem = ({ user, handleFunction }) => {
   return (
-    <Box
+    <div
       onClick={handleFunction}
       cursor="pointer"
       bg="#E8E8E8"
@@ -22,21 +17,15 @@ const UserListItem = ({ user,handleFunction }) => {
       mb={2}
       borderRadius="lg"
     >
-      <Avatar
-        mr={2}
-        size="sm"
-        cursor="pointer"
-        name={user.name}
-        src={user.pic}
-      />
-      <Box>
-        <Text>{user.name}</Text>
-        <Text fontSize="xs">
+      <div mr={2} size="sm" cursor="pointer" name={user.name} src={user.pic} />
+      <div>
+        <h3>{user.name}</h3>
+        <h3 fontSize="xs">
           <b>Email : </b>
           {user.email}
-        </Text>
-      </Box>
-    </Box>
+        </h3>
+      </div>
+    </div>
   );
 };
 

@@ -1,18 +1,17 @@
-import { Skeleton, Stack } from '@chakra-ui/react'
-import React from 'react'
+import React from "react";
 
 const ChatLoading = () => {
   return (
-    <Stack>
+    <div>
+      {/* <Skeleton height="45px"/>
         <Skeleton height="45px"/>
         <Skeleton height="45px"/>
         <Skeleton height="45px"/>
         <Skeleton height="45px"/>
         <Skeleton height="45px"/>
-        <Skeleton height="45px"/>
-        <Skeleton height="45px"/>
-    </Stack>
-  )
-}
+        <Skeleton height="45px"/> */}
+    </div>
+  );
+};
 
-export default ChatLoading
+export default ChatLoading;

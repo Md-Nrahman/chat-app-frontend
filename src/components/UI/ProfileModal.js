@@ -1,14 +1,10 @@
-import { ViewIcon } from '@chakra-ui/icons'
-import { Button, IconButton, Image, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react'
-import userEvent from '@testing-library/user-event'
-import React from 'react'
+import userEvent from "@testing-library/user-event";
+import React from "react";
 
-const ProfileModal = ({user,children}) => {
-
-    const {isOpen, onOpen, onClose} = useDisclosure()
+const ProfileModal = ({ user, children }) => {
   return (
     <>
-    {children?(<span>{children}</span>):(
+      {/* {children?(<span>{children}</span>):(
         <IconButton d={{base:"flex"}}
         icon={<ViewIcon/>} onClick={onOpen} />
     )}
@@ -31,9 +27,9 @@ const ProfileModal = ({user,children}) => {
             
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </>
-  )
-}
+  );
+};
 
-export default ProfileModal
+export default ProfileModal;
