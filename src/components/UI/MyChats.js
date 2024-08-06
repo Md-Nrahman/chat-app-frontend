@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa";
 import { baseUrl } from "../../common/baseUrl";
+import { getSender } from "../../config/ChatLogics";
 import { ChatState } from "../../Context/ChatProvider";
 import ChatLoading from "./ChatLoading";
-import { getSender } from "../../config/ChatLogics";
 import GroupChatModal from "./GroupChatModal";
 
 const MyChats = ({ fetchAgain }) => {
@@ -41,18 +42,17 @@ const MyChats = ({ fetchAgain }) => {
 
   return (
     <div
-      className={`flex-col items-center justify-center bg-white w-full h-full md:w-1/3 md:h-full md:rounded-lg md:border-2 md:border-gray-200 md:shadow-lg md:ml-2 md:mr-2`}
+      className={`${selectedChat ? "hidden md:block":""} flex-col items-center justify-center bg-white w-full h-full md:w-1/3 md:h-full md:rounded-lg md:border-2 md:border-gray-200 md:shadow-lg md:ml-2 md:mr-2`}
     >
       <div direction="column" align="center"></div>
       <div className="w-full p-2 border-4">
-        <div className="" justify="space-between" align="center">
+        <div className="items-center flex justify-between">
           My Chats
           <GroupChatModal>
             <button
-              fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-              // rightIcon={<AddIcon />}
+            className="flex p-2 items-center justify-center w-full h-10 text-white bg-blue-500 rounded-lg"
             >
-              <div>New Group Chat</div>
+              <FaPlus /><div>New Group Chat</div>
             </button>
           </GroupChatModal>
         </div>
@@ -78,7 +78,7 @@ const MyChats = ({ fetchAgain }) => {
                     <h3 fontSize="xs">
                       <b>{chat.latestMessage.sender.name} : </b>
                       {chat.latestMessage.content.length > 50
-                        ? chat.latestMessage.content.substring(0, 51) + "..."
+                        ? chat.latestMessage.content.substring(0, 11) + " ..."
                         : chat.latestMessage.content}
                     </h3>
                   )}

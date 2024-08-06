@@ -1,8 +1,7 @@
 import { useState } from "react";
-import SideDrawer from "../components/UI/SideDrawer";
-import { ChatState } from "../Context/ChatProvider";
 import Chatbox from "../components/UI/ChatBox";
 import MyChats from "../components/UI/MyChats";
+import { ChatState } from "../Context/ChatProvider";
 
 const Chatpage = () => {
   const [fetchAgain, setFetchAgain] = useState(false);
@@ -13,7 +12,7 @@ const Chatpage = () => {
       <div className="w-full h-screen p-4">
         <div justify="space-between h-screen">
           {user ? (
-            <div className="flex h-screen">
+            <div className="md:flex h-screen">
               <MyChats fetchAgain={fetchAgain} />
               <Chatbox
                 fetchAgain={fetchAgain}

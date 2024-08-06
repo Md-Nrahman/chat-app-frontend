@@ -1,14 +1,15 @@
-import { getSender, getSenderFull } from "../../config/ChatLogics";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import ScrollableChat from "./ScrollableChat";
+import { useEffect, useState } from "react";
 import Lottie from "react-lottie";
+import { getSender, getSenderFull } from "../../config/ChatLogics";
+import ScrollableChat from "./ScrollableChat";
 // import animationData from "../animations/typing.json";
 
+import { IoArrowBack } from "react-icons/io5";
 import io from "socket.io-client";
-import UpdateGroupChatModal from "../UI/UpdateGroupChatModal";
 import { ChatState } from "../../Context/ChatProvider";
 import { baseUrl } from "../../common/baseUrl";
+import UpdateGroupChatModal from "../UI/UpdateGroupChatModal";
 import ProfileModal from "./ProfileModal";
 const ENDPOINT = "https://chat-backend-zxi2.onrender.com/";
 var socket, selectedChatCompare;
@@ -156,18 +157,15 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     <>
       {selectedChat ? (
         <>
-          <h3 className="p-3 bg-white w-full h-20 rounded-lg overflow-y-hidden">
-            {/* <IconButton
-              d={{ base: "flex", md: "none" }}
-              icon={<ArrowBackIcon />}
-              onClick={() => setSelectedChat("")}
-            /> */}
+          <h3 className="p-3 bg-white w-full h-20 rounded-lg overflow-y-hidden flex items-center space-x-2">
+            <button className="flex md:hidden" onClick={() => setSelectedChat("")}><IoArrowBack /></button>
             {messages &&
               (!selectedChat.isGroupChat ? (
                 <div className="flex items-center space-x-5">
                   <img
                     className="h-12 w-12 rounded-full object-contain"
                     src={selectedChat?.users[0]?.pic}
+                    alt="profile"
                   />
                   {getSender(user, selectedChat.users)}
                   <ProfileModal
@@ -187,18 +185,22 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </h3>
           <div className="flex flex-col bg-[#FAFAFA] w-full h-[calc(100vh-6rem)] rounded-lg overflow-y-hidden">
             {loading ? (
-              // <Spinner
-              //   size="xl"
-              //   w={20}
-              //   h={20}
-              //   alignSelf="center"
-              //   margin="auto"
-              // />
-              <></>
+              <div className="messages flex-1 p-3 w-full h-[calc(90vh-6rem)]">
+
+              {/* <Spinner
+                size="xl"
+                w={20}
+                h={20}
+                alignSelf="center"
+                margin="auto"
+               /> */}
+
+             
+              </div>
             ) : (
               <div
-                className="messages flex-1 p-3 w-full h-[calc(100vh-6rem)]"
-                style={{ height: "80%" }}
+                className="messages flex-1 p-3 w-full h-[calc(90vh-6rem)]"
+                // style={{ height: "80%" }}
               >
                 <ScrollableChat
                   messages={messages}
@@ -239,8 +241,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         </>
       ) : (
         // to get socket.io on same page
-        <div d="flex" alignItems="center" justifyContent="center" h="100%">
-          <h3 fontSize="3xl" pb={3} fontFamily="Work sans">
+        <div className="flex justify-center items-center h-full">
+          <h3 className="text-2xl pb-3 font-sans">
             Click on a user to start chatting
           </h3>
         </div>
