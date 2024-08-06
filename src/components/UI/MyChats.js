@@ -38,6 +38,8 @@ const MyChats = ({ fetchAgain }) => {
     // eslint-disable-next-line
   }, [fetchAgain]);
 
+  console.log(chats);
+
   return (
     <div
       className={`${selectedChat ? "hidden md:block":""} flex-col items-center justify-center bg-white w-full h-full md:w-1/3 md:max-h-screen md:rounded-lg md:border-2 md:border-gray-200 md:shadow-lg  md:mr-2`}
@@ -59,12 +61,17 @@ const MyChats = ({ fetchAgain }) => {
           {chats ? (
             <div className="">
               {chats.map((chat) => (
-                <div
-                  className={`py-3 px-5 rounded-lg cursor-pointer border-t ${
+                <div className={`flex space-x-2 items-center w-full py-3 px-5 rounded-lg cursor-pointer border-t ${
                     selectedChat === chat ? "bg-blue-600/10" : " text-black"
                   }`}
                   onClick={() => setSelectedChat(chat)}
                   key={chat._id}
+                  >
+                  <img src={chat?.users?.filter((person) => person._id !== user._id)[0]?.pic} alt="profile" className="h-10 w-10 rounded-full object-contain" />
+
+                <div
+                  className={` `}
+                  
                 >
                   <h3 className="font-bold text-gray-800">
                     {!chat.isGroupChat
@@ -79,6 +86,7 @@ const MyChats = ({ fetchAgain }) => {
                         : chat.latestMessage.content}
                     </h3>
                   )}
+                </div>
                 </div>
               ))}
             </div>
