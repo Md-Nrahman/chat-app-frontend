@@ -1,11 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaPlus } from "react-icons/fa";
 import { baseUrl } from "../../common/baseUrl";
 import { getSender } from "../../config/ChatLogics";
 import { ChatState } from "../../Context/ChatProvider";
 import ChatLoading from "./ChatLoading";
-import GroupChatModal from "./GroupChatModal";
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
@@ -42,25 +40,24 @@ const MyChats = ({ fetchAgain }) => {
 
   return (
     <div
-      className={`${selectedChat ? "hidden md:block":""} flex-col items-center justify-center bg-white w-full h-full md:w-1/3 md:h-full md:rounded-lg md:border-2 md:border-gray-200 md:shadow-lg md:ml-2 md:mr-2`}
+      className={`${selectedChat ? "hidden md:block":""} flex-col items-center justify-center bg-white w-full h-full md:w-1/3 md:max-h-screen md:rounded-lg md:border-2 md:border-gray-200 md:shadow-lg  md:mr-2`}
     >
-      <div direction="column" align="center"></div>
-      <div className="w-full p-2 border-4">
-        <div className="items-center flex justify-between">
+      <div className="w-full p-4 ">
+        <div className="items-center font-bold flex justify-between">
           My Chats
-          <GroupChatModal>
+          {/* <GroupChatModal>
             <button
             className="flex p-2 items-center justify-center w-full h-10 text-white bg-blue-500 rounded-lg"
             >
               <FaPlus /><div>New Group Chat</div>
             </button>
-          </GroupChatModal>
+          </GroupChatModal> */}
         </div>
       </div>
-      <div className="w-full h-full">
+      <div className="w-full max-h-[90vh] overflow-y-auto">
         <div>
           {chats ? (
-            <div overflowY="scroll">
+            <div className="">
               {chats.map((chat) => (
                 <div
                   className={`py-3 px-5 rounded-lg cursor-pointer border-t ${
@@ -69,13 +66,13 @@ const MyChats = ({ fetchAgain }) => {
                   onClick={() => setSelectedChat(chat)}
                   key={chat._id}
                 >
-                  <h3>
+                  <h3 className="font-bold text-gray-800">
                     {!chat.isGroupChat
                       ? getSender(loggedUser, chat.users)
                       : chat.chatName}
                   </h3>
                   {chat.latestMessage && (
-                    <h3 fontSize="xs">
+                    <h3 className="text-xs text-gray-800">
                       <b>{chat.latestMessage.sender.name} : </b>
                       {chat.latestMessage.content.length > 50
                         ? chat.latestMessage.content.substring(0, 11) + " ..."

@@ -1,19 +1,22 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { baseUrl } from "../../common/baseUrl";
 import { ChatState } from "../../Context/ChatProvider";
 import UserListItem from "../User/UserListItem";
 import ChatLoading from "./ChatLoading";
+import ModalComponent from "./ModalComponent";
 import ProfileModal from "./ProfileModal";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const SideDrawer = () => {
   const [search, setsearch] = useState("");
   const [searchResult, setsearchResult] = useState([]);
+  const [searchUserShow, setsearchUserShow] = useState(false);
   const [loading, setloading] = useState(false);
   const [chatLoading, setchatLoading] = useState();
+  const [profileModal, setProfileModal] = useState(false);
   const { user, setSelectedChat, chats, setChats } = ChatState();
 
   const history = useHistory();
@@ -80,59 +83,47 @@ const SideDrawer = () => {
   return (
     <>
       <div
-        className="w-full p-2 border-4"
-        bg="white"
-        w="100%"
-        p="5px 10px 5px 10px"
-        borderWidth="5px"
+        className="w-full py-2 px-5 border-4 bg-white flex justify-between items-center"
       >
-        <div justify="space-between" align="center">
-          <button variant="ghost">
+       <button className="flex justify-center items-center" onClick={()=>{setsearchUserShow(!searchUserShow);setsearchResult([])}}>
             <i className="fas fa-search"></i>
-            <h3 d={{ base: "none", md: "flex" }} px="4">
+            <h3 className="px-4 hidden md:flex">
               Search User
             </h3>
           </button>
 
-          <h3 fontSize="2xl" fontFamily="Work sans">
-            Talk-A-Tive
+          <h3 className="font-bold text-2xl font-sans text-blue-800">
+            GoChat
           </h3>
           <div>
-            <div>
-              <button p={1}>{/* <BellIcon fontSize="2xl" m={1} /> */}</button>
-            </div>
 
-            <div>
+            <div className="flex justify-between items-center">
               <button>
-                {/* <Avatar
-                  size="sm"
-                  cursor="pointer"
-                  name={user.name}
-                  src={user.pic}
-                /> */}
+                <img className="h-10 hover:cursor-pointer" src={user.pic} alt="profile" onClick={()=>setProfileModal(true)} />
               </button>
-              <div>
-                <ProfileModal user={user}>
-                  <div>My Profile</div>
-                </ProfileModal>
+              <div className="flex space-x-4">
+                  {/* <div>My Profile</div> */}
+                {profileModal && <ProfileModal user={user} closeModal={setProfileModal}>
+                </ProfileModal>}
 
                 <div />
-                <div onClick={logOutHandler}>Log Out</div>
+                <div className="hover:cursor-pointer" onClick={logOutHandler}>Log Out</div>
               </div>
             </div>
           </div>
-        </div>
       </div>
 
-      <div placement="left">
-        <div />
+      {searchUserShow && 
+      <ModalComponent title="Search User" closeModal={()=>setsearchUserShow(false)}>
+        <div placement="left">
+        
         <div>
-          <h3 borderBottomWidth="1px">Search users</h3>
           <div>
-            <div pb={2}>
-              <div>
+            <div className="pb-2">
+              <div className="flex pb-2 space-x-2">
                 <input
-                  placeholder="Search by name or email"
+                className="w-full h-10 px-3 border-b border-gray-300 outline-none"
+                placeholder="Search by name or email"
                   value={search}
                   onChange={(e) => setsearch(e.target.value)}
                 />
@@ -146,7 +137,7 @@ const SideDrawer = () => {
                 <UserListItem
                   key={user._id}
                   user={user}
-                  handleFunction={() => accessChat(user._id)}
+                  handleFunction={() => {accessChat(user._id);setsearchResult([]);setsearchUserShow(false)}}
                 />
               ))
             )}
@@ -154,6 +145,8 @@ const SideDrawer = () => {
           </div>
         </div>
       </div>
+      </ModalComponent>
+      }
     </>
   );
 };

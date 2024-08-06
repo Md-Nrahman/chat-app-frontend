@@ -6,6 +6,7 @@ import ScrollableChat from "./ScrollableChat";
 // import animationData from "../animations/typing.json";
 
 import { IoArrowBack } from "react-icons/io5";
+import { LineWave } from "react-loader-spinner";
 import io from "socket.io-client";
 import { ChatState } from "../../Context/ChatProvider";
 import { baseUrl } from "../../common/baseUrl";
@@ -21,6 +22,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
+  const [profileModal, setProfileModal] = useState(false);
 
   const defaultOptions = {
     loop: true,
@@ -153,6 +155,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }, timerLength);
   };
 
+  console.log(selectedChat);
+
   return (
     <>
       {selectedChat ? (
@@ -163,14 +167,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               (!selectedChat.isGroupChat ? (
                 <div className="flex items-center space-x-5">
                   <img
-                    className="h-12 w-12 rounded-full object-contain"
-                    src={selectedChat?.users[0]?.pic}
+                    className="h-12 w-12 rounded-full object-contain hover:cursor-pointer"
+                    src={selectedChat?.users?.filter(person=>person._id !== user._id)[0]?.pic}
                     alt="profile"
+                    onClick={() => setProfileModal(true)}
                   />
                   {getSender(user, selectedChat.users)}
-                  <ProfileModal
+                  {profileModal && <ProfileModal
                     user={getSenderFull(user, selectedChat.users)}
-                  />
+                    closeModal={setProfileModal}
+                  />}
                 </div>
               ) : (
                 <>
@@ -185,15 +191,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </h3>
           <div className="flex flex-col bg-[#FAFAFA] w-full h-[calc(100vh-6rem)] rounded-lg overflow-y-hidden">
             {loading ? (
-              <div className="messages flex-1 p-3 w-full h-[calc(90vh-6rem)]">
-
-              {/* <Spinner
-                size="xl"
-                w={20}
-                h={20}
-                alignSelf="center"
-                margin="auto"
-               /> */}
+              <div className="messages flex-1 p-3 w-full justify-center items-center h-[calc(90vh-6rem)]">
+                <LineWave
+                  color="#3367EA"
+                  height={100}
+                  width={100}
+                  margin="auto"
+                  wrapperStyle={{ margin: "auto", height: "100%", width: "100%",
+                  display: "flex", justifyContent: "center", alignItems: "center",
+                   }}
+                />
 
              
               </div>
