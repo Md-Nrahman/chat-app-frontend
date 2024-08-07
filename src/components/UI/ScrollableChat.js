@@ -24,7 +24,7 @@ const ScrollableChat = ({ messages }) => {
               />
             )}
             <span
-              className={`text-sm max-w-1/2 min-h-8 p-4 my-2 shadow-md ${
+              className={`text-sm max-w-[300px] min-h-8 p-4 my-2 shadow-md break-words ${
                 m.sender._id === user._id
                   ? "bg-[#b3e5fc] rounded-tr-lg rounded-bl-lg rounded-tl-lg "
                   : "bg-white rounded-bl-lg rounded-br-lg rounded-tr-lg"
