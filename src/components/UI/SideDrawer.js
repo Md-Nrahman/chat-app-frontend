@@ -17,7 +17,7 @@ const SideDrawer = () => {
   const [loading, setloading] = useState(false);
   const [chatLoading, setchatLoading] = useState();
   const [profileModal, setProfileModal] = useState(false);
-  const { user, setSelectedChat, chats, setChats } = ChatState();
+  const { user, setSelectedChat, chats, setChats,selectedChat } = ChatState();
 
   const history = useHistory();
 
@@ -83,7 +83,7 @@ const SideDrawer = () => {
   return (
     <>
       <div
-        className="w-full py-2 px-5 border-4 bg-white flex justify-between items-center"
+        className={`w-full py-2 px-5 border-4 bg-white flex justify-between items-center ${selectedChat ? "hidden md:flex":""}`}
       >
        <button className="flex justify-center items-center" onClick={()=>{setsearchUserShow(!searchUserShow);setsearchResult([])}}>
             <i className="fas fa-search"></i>

@@ -189,7 +189,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 </>
               ))}
           </h3>
-          <div className="flex flex-col bg-[#FAFAFA] w-full h-[calc(100vh-6rem)] rounded-lg overflow-y-hidden">
+          <div className="flex flex-col bg-[#FAFAFA] w-full h-[calc(98vh-6rem)] rounded-lg overflow-y-hidden">
             {loading ? (
               <div className="messages flex-1 p-3 w-full justify-center items-center h-[calc(90vh-6rem)]">
                 <LineWave
